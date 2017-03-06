@@ -1,7 +1,7 @@
 class Account
 
   DEFAULT_BALANCE = 0
-  attr_reader :balance, :date, :receipts, :overdraft_available
+  attr_reader :balance, :date, :receipts, :overdraft_available, :statement
 
   def initialize
     @balance = DEFAULT_BALANCE
@@ -55,12 +55,12 @@ class Account
   def transaction(amount)
     @balance = @balance + amount
     receipt = [@date, amount, @balance]
+    @receipts << receipt
     add_to_statement(receipt)
     return receipt
   end
 
   def add_to_statement(receipt)
-    @receipts << receipt
     new_line = ['date', 'credit', 'debit', 'balance']
     if receipt[1] < 0
       new_line[2] = -(receipt[1])
