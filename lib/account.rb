@@ -37,11 +37,13 @@ class Account
   end
 
   def deposit(amount)
+    raise 'positives numbers only' if amount < 0
     receipt = transaction(amount)
     return "Today on #{@date}, you deposited £#{amount}, your new balance is £#{@balance}"
   end
 
   def withdraw(amount)
+    raise 'positives numbers only' if amount < 0
     if @balance <= 0 && !@overdraft_available
       raise 'you do not have overdraft available'
     else

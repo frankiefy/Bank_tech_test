@@ -55,6 +55,9 @@ describe Account do
     it 'can deposit 1 into account' do
       expect(subject.deposit(1)).to eq("Today on 01/01/2017, you deposited £1, your new balance is £1")
     end
+    it 'cannot deposit with negative number' do
+      expect { subject.deposit(-1) }.to raise_error("positives numbers only")
+    end
   end
 
   context "withdraw" do
@@ -62,8 +65,11 @@ describe Account do
       subject.change_overdraft_available(true)
       expect(subject.withdraw(1)).to eq("Today on 01/01/2017, you withdrew £1, your new balance is £-1")
     end
-    it 'can not withdraw 1 from account, when no funds' do
+    it 'cannot withdraw 1 from account, when no funds' do
       expect { subject.withdraw(1) }.to raise_error("you do not have overdraft available")
+    end
+    it 'cannot withdraw with negative number' do
+      expect { subject.withdraw(-1) }.to raise_error("positives numbers only")
     end
   end
 
