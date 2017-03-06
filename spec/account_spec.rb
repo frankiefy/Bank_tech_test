@@ -6,11 +6,11 @@ describe Account do
   context "initializes values" do
 
     it 'initializes with balance 0' do
-      expect(subject.show_balance).to eq(0)
+      expect(subject.balance).to eq(0)
     end
 
     it 'initializes with date 01/01/2017' do
-      expect(subject.show_date).to eq('01/01/2017')
+      expect(subject.date).to eq('01/01/2017')
     end
 
     it 'initializes with a statement' do
@@ -22,7 +22,7 @@ describe Account do
   context "change_date" do
     it 'can change the date' do
       subject.change_date('02/01/2017')
-      expect(subject.show_date).to eq('02/01/2017')
+      expect(subject.date).to eq('02/01/2017')
     end
   end
 

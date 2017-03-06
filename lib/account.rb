@@ -1,6 +1,7 @@
 class Account
 
   DEFAULT_BALANCE = 0
+  attr_reader :balance, :date
 
   def initialize
     @balance = DEFAULT_BALANCE
@@ -20,14 +21,6 @@ class Account
        print line[3].to_s
        puts "\n"
     end
-  end
-
-  def show_balance
-    return @balance
-  end
-
-  def show_date
-    return @date
   end
 
   def change_date(new_date)
