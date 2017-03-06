@@ -17,12 +17,28 @@ describe Account do
       expect(subject.show_statement).to eq([])
     end
 
+    it 'initializes with reciepts' do
+      expect(subject.receipts).to eq([])
+    end
+
   end
 
   context "change_date" do
     it 'can change the date' do
       subject.change_date('02/01/2017')
       expect(subject.date).to eq('02/01/2017')
+    end
+  end
+
+  context "change_overdraft_available" do
+    it 'can change the overdraft availablity' do
+      subject.change_overdraft_available(true)
+      expect(subject.overdraft_available).to eq(true)
+    end
+    it 'cannot change the overdraft availablity when in debt' do
+      subject.change_overdraft_available(true)
+      subject.transaction(-1)
+      expect { subject.change_overdraft_available(false) }.to raise_error('you cannot change overdraft availablity when in overdraft')
     end
   end
 
@@ -43,7 +59,11 @@ describe Account do
 
   context "withdraw" do
     it 'can withdraw 1 from account' do
+      subject.change_overdraft_available(true)
       expect(subject.withdraw(1)).to eq("Today on 01/01/2017, you withdrew £1, your new balance is £-1")
+    end
+    it 'can not withdraw 1 from account, when no funds' do
+      expect { subject.withdraw(1) }.to raise_error("you do not have overdraft available")
     end
   end
 
@@ -51,6 +71,13 @@ describe Account do
     it 'adds the recipt to statement' do
       subject.add_to_statement(['01/01/2017', 1, 1])
       expect(subject.show_statement).to eq([["01/01/2017", 1, nil, 1]])
+    end
+  end
+
+  context "reciepts" do
+    it 'contains reciepts from transactions' do
+      subject.deposit(1)
+      expect(subject.receipts).to eq([["01/01/2017", 1, 1]])
     end
   end
 
