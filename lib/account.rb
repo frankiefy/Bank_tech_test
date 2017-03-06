@@ -1,7 +1,11 @@
 class Account
 
   def initialize
-    return 1
+    @balance = 0
+  end
+
+  def show_balance
+    return @balance
   end
 
 end
