@@ -47,5 +47,12 @@ describe Account do
     end
   end
 
+  context "add_to_statement" do
+    it 'adds the recipt to statement' do
+      subject.add_to_statement(['01/01/2017', 1, 1])
+      expect(subject.show_statement).to eq([["01/01/2017", 1, nil, 1]])
+    end
+  end
+
 
 end
