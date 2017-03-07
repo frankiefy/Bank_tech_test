@@ -23,16 +23,9 @@ class Statement
   end
 
   def show_statement
-    puts "date          |  credit  | debit | balance"
+    p ["Date", "Credit", "Debit", "Balance"].map!{|header| header.center(20)}.join("||")
     @transactions.reverse.each do |line|
-       print line[0].to_s
-       print "          "
-       print line[1].to_s
-       print "        "
-       print line[2].to_s
-       print "        "
-       print line[3].to_s
-       puts "\n"
+      p line.map!{ |x| x.to_s.center(20) }.join("||")
     end
   end
 
