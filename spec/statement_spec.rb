@@ -24,7 +24,7 @@ describe Statement do
     it 'shows the statement' do
       subject.add_transaction(["01/01/2017", 5, 9])
       subject.add_transaction(["01/01/2017", -1, 8])
-      expect(subject.show_statement).to eq([["01/01/2017", 5, nil, 9], ["01/01/2017", nil, 1, 8]])
+      expect(subject.show_statement).to eq([["01/01/2017", nil, 1, 8], ["01/01/2017", 5, nil, 9]])
     end
 
   end

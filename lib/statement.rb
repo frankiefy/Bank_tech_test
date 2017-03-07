@@ -24,7 +24,7 @@ class Statement
 
   def show_statement
     puts "date          |  credit  | debit | balance"
-    @transactions.each do |line|
+    @transactions.reverse.each do |line|
        print line[0].to_s
        print "          "
        print line[1].to_s
