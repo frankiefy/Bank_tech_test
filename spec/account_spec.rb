@@ -14,7 +14,7 @@ describe Account do
     end
 
     it 'initializes with a statement' do
-      expect(subject.show_statement).to eq([])
+      expect(subject.statement).to be_a Statement
     end
 
     it 'initializes with reciepts' do
@@ -70,13 +70,6 @@ describe Account do
     end
     it 'cannot withdraw with negative number' do
       expect { subject.withdraw(-1) }.to raise_error("positives numbers only")
-    end
-  end
-
-  context "add_to_statement" do
-    it 'adds the recipt to statement' do
-      subject.add_to_statement(['01/01/2017', 1, 1])
-      expect(subject.show_statement).to eq([["01/01/2017", 1, nil, 1]])
     end
   end
 
