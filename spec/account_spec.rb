@@ -37,17 +37,19 @@ describe Account do
     end
     it 'cannot change the overdraft availablity when in debt' do
       subject.change_overdraft_available(true)
-      subject.transaction(-1)
+      subject.send(:transaction, -1)
       expect { subject.change_overdraft_available(false) }.to raise_error('you cannot change overdraft availablity when in overdraft')
     end
   end
 
   context "transaction" do
     it 'can transact 1 into account' do
-      expect(subject.transaction(1)).to eq(['01/01/2017', 1, 1])
+      result = subject.send(:transaction, 1)
+      expect(result).to eq(['01/01/2017', 1, 1])
     end
     it 'can transact -1 from account' do
-      expect(subject.transaction(-1)).to eq(['01/01/2017', -1, -1])
+      result = subject.send(:transaction, -1)
+      expect(result).to eq(['01/01/2017', -1, -1])
     end
   end
 

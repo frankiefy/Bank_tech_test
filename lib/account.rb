@@ -13,7 +13,6 @@ class Account
     @overdraft_available = false
   end
 
-
   def change_overdraft_available(new_value)
     if balance < 0 && new_value == false
       raise 'you cannot change overdraft availablity when in overdraft'
@@ -41,16 +40,14 @@ class Account
     end
   end
 
+  private
+
   def transaction(amount)
     @balance = @balance + amount
     receipt = [@date, amount, @balance]
     @receipts << receipt
-    #add_to_statement(receipt)
     @statement.add_transaction(receipt)
     return receipt
   end
-
-
-
 
 end
